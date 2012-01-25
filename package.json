@@ -2,7 +2,7 @@
   "author": "Stephen Belanger <admin@stephenbelanger.com> (http://stephenbelanger.com)",
   "name": "crsh",
   "description": "crsh your javascript into tiny blocks.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "url": "git://github.com/Qard/crsh.git"
   },
