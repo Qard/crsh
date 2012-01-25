@@ -9,6 +9,9 @@
   "engines": {
     "node": ">= 0.4.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "async": "0.1.x",
+    "uglify-js": "1.2.x"
+  },
   "devDependencies": {}
 }
