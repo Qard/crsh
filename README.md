@@ -76,6 +76,9 @@ Add or remove a file by its path from the block and watcher. Note that this will
 ### crsh.compile(callback)
 Forces the current block to compile. This is called automatically when a new block is constructed with a file_paths list or the watcher is enable and a change has occured. When chaining, this is called manually instead.
 
+### crsh.getUrl()
+Gets a handy url fragment containing the name of the block file and a modification date timestamp for cachebusting.
+
 ### Crsh.middleware([base_path], blockDefs)
 For each item in blockDefs, constructs a new Crsh instance and exposes it in req.crsh[name]. Also creates a "crsh_{name}" properties in view locals.
 
