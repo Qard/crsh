@@ -6,7 +6,7 @@ With crsh, you can combine a whole bunch of javascript (or coffeescript!) files 
 
 ## Install
 
-    npm install jsonfig
+    npm install crsh
 
 ## Usage
 ### Middleware Mode
