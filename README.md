@@ -67,21 +67,21 @@ or
 
 ## API
 
-#### new Crsh([base_path], [file_paths])
-Constructs a new block, compiles and starts the watcher, if watcher is allowed in the current mode. Accepts a base_path and a list of file paths to add to the block, either can be left out. If base_path is empty Crsh.path will be used, which defaults to process.cwd(). If file_paths is empty, crsh.compile() will not be executed right away; you must first add() file paths, then compile().
+### new Crsh([basePath], [filePaths])
+Constructs a new block, compiles and starts the watcher, if watcher is allowed in the current mode. Accepts a basePath and a list of file paths to add to the block, either can be left out. If base_path is empty Crsh.path will be used, which defaults to process.cwd(). If filePaths is empty, crsh.compile() will not be executed right away; you must first add() file paths, then compile().
 
-#### crsh.add|remove(path)
+### crsh.add|remove(path)
 Add or remove a file by its path from the block and watcher. Note that this will not recompile the block. In this particular case crsh.compile() should be called manually.
 
-#### crsh.compile(callback)
+### crsh.compile(callback)
 Forces the current block to compile. This is called automatically when a new block is constructed with a file_paths list or the watcher is enable and a change has occured. When chaining, this is called manually instead.
 
-#### Crsh.middleware([base_path], block_defs)
-For each item in block_defs, constructs a new Crsh instance and exposes it in req.crsh[name]. Also creates a "crsh_{name}" properties in view locals.
+### Crsh.middleware([base_path], blockDefs)
+For each item in blockDefs, constructs a new Crsh instance and exposes it in req.crsh[name]. Also creates a "crsh_{name}" properties in view locals.
 
 ---
 
-### Copyright (c) 2011 Stephen Belanger
+### Copyright (c) 2012 Stephen Belanger
 #### Licensed under MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
