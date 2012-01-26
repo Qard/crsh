@@ -1,5 +1,5 @@
 # CRSH your javascript into tiny blocks.
-With crsh, you can combine a whole bunch of javascript (or coffeescript!) files into one tiny block. Or several if you like. Coffeescript is compiled automagically after each change, but not when in production mode. Inversely; the resulting code is uglified, but only when IN production. Line numbers are handy in development.
+With crsh, you can combine a whole bunch of javascript (or coffeescript!) files into one tiny block. Or several if you like. All files are compiled and merged automagically after each change, but not when in production mode. Inversely; the resulting code is uglified, but only when IN production. Line numbers are handy in development.
 
 ## Requirements
 * Node.js 0.4+
