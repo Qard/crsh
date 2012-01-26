@@ -1,5 +1,5 @@
-# CRSH your javascript into tiny blocks.
-With crsh, you can combine a whole bunch of javascript (or coffeescript!) files into one tiny block. Or several if you like. All files are compiled and merged automagically after each change, but not when in production mode. Inversely; the resulting code is uglified, but only when IN production. Line numbers are handy in development.
+# CRSH your javascript and css into tiny blocks.
+With crsh, you can combine a whole bunch of javascript and coffeescript or css and stylus files into one tiny block. Or several if you like. All files are compiled and merged automagically after each change, but the watcher is disabled in production. In production, resulting javascript will also be uglified.
 
 ## Requirements
 * Node.js 0.4+
@@ -81,6 +81,12 @@ Gets a handy url fragment containing the name of the block file and a modificati
 
 ### Crsh.middleware([base_path], blockDefs)
 For each item in blockDefs, constructs a new Crsh instance and exposes it in req.crsh[name]. Also creates a "crsh_{name}" properties in view locals.
+
+### Crsh.getFormat(filename_or_path)
+Will return "js" if the extension is .js or .coffee, will return .css if the extension is .css or .styl and will otherwise return false.
+
+### Crsh.isJs|isCss(filename_or_path)
+Convenient aliases to Crsh.getFormat to determine if the format is what you expect.
 
 ---
 
