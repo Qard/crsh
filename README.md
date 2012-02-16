@@ -65,6 +65,37 @@ or
     
     var url = crsh_libs.getUrl()
 
+### NEW! Filters
+    
+    // Let's try a csv-to-json filter
+    Crsh.addFilter('csv', function () {
+      var csv = require('csv')
+      return function () {
+        this.addType('json', 'csv')
+
+        return function (data, next) {
+          var pattern = /(?:^|,)("(?:[^"]+)*"|[^,]*)/g
+            , lines = data.split("\n")
+            , keys = lines.shift()
+              .split(pattern)
+              .map(function (key) {
+                return key.toLowerCase()
+              })
+            , rows = lines.map(function (line) {
+              var res = {}
+              line.split(pattern).forEach(function (val, i) {
+                if (keys[i]) {
+                  res[keys[i]] = val.replace(/"/g, '')
+                }
+              })
+              return res
+            })
+
+          callback(null, JSON.stringify(rows))
+        }
+      }
+    })
+
 ## API
 
 ### new Crsh([basePath], [filePaths])
@@ -72,6 +103,18 @@ Constructs a new block, compiles and starts the watcher, if watcher is allowed i
 
 ### crsh.add|remove(path)
 Add or remove a file by its path from the block and watcher. Note that this will not recompile the block. In this particular case crsh.compile() should be called manually.
+
+### crsh.addType(outputType, ext)
+Tells crsh to allow files of the specified extension and that they represent files of outputType. For example; crsh.addType('js', 'coffee') would tell it that Coffeescript files are allowed and should understood as Javascript. You'll still need to supply a filter to actually convert the Coffeescript though.
+
+### crsh.addFilter(ext, filter)
+Add a filter function to manipulate each file of the given file extension. Filters can be in two formats; a function which receives (data, next) or a closure which returns a (data, next) receiver. The closure type is handy for applying some modifications to Crsh beforehand. For example; using addType() to allow the file type we are filtering.
+
+### crsh.findFilter(ext)
+Retrieve the currently assigned filter for the supplied extension. This is meant to be used internally during the compile phase.
+
+### crsh.coffee|stylus|less()
+Crsh comes with some pre-made filters. For backwards compatibility, coffee and stylus filters are added automatically. These filters will need to be added explicitly in the next version though, be warned. Use them like this; crsh.addFilter('less', crsh.less())
 
 ### crsh.compile(callback)
 Forces the current block to compile. This is called automatically when a new block is constructed with a file_paths list or the watcher is enable and a change has occured. When chaining, this is called manually instead.
@@ -83,7 +126,7 @@ Gets a handy url fragment containing the name of the block file and a modificati
 For each item in blockDefs, constructs a new Crsh instance and exposes it in req.crsh[name]. Also creates a "crsh_{name}" properties in view locals.
 
 ### Crsh.getFormat(filename_or_path)
-Will return "js" if the extension is .js or .coffee, will return .css if the extension is .css or .styl and will otherwise return false.
+Determines file extension and returns the outputType, if known, or false.
 
 ### Crsh.isJs|isCss(filename_or_path)
 Convenient aliases to Crsh.getFormat to determine if the format is what you expect.
