@@ -70,29 +70,27 @@ or
     // Let's try a csv-to-json filter
     Crsh.addFilter('csv', function () {
       var csv = require('csv')
-      return function () {
-        this.addType('json', 'csv')
+      this.addType('json', 'csv')
 
-        return function (data, next) {
-          var pattern = /(?:^|,)("(?:[^"]+)*"|[^,]*)/g
-            , lines = data.split("\n")
-            , keys = lines.shift()
-              .split(pattern)
-              .map(function (key) {
-                return key.toLowerCase()
-              })
-            , rows = lines.map(function (line) {
-              var res = {}
-              line.split(pattern).forEach(function (val, i) {
-                if (keys[i]) {
-                  res[keys[i]] = val.replace(/"/g, '')
-                }
-              })
-              return res
+      return function (data, next) {
+        var pattern = /(?:^|,)("(?:[^"]+)*"|[^,]*)/g
+          , lines = data.split("\n")
+          , keys = lines.shift()
+            .split(pattern)
+            .map(function (key) {
+              return key.toLowerCase()
             })
+          , rows = lines.map(function (line) {
+            var res = {}
+            line.split(pattern).forEach(function (val, i) {
+              if (keys[i]) {
+                res[keys[i]] = val.replace(/"/g, '')
+              }
+            })
+            return res
+          })
 
-          callback(null, JSON.stringify(rows))
-        }
+        callback(null, JSON.stringify(rows))
       }
     })
 
