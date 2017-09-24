@@ -1,5 +1,7 @@
 [![build status](https://secure.travis-ci.org/Qard/crsh.png)](http://travis-ci.org/Qard/crsh)
 # CRSH your javascript and css into tiny blocks.
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Qard/crsh.svg)](https://greenkeeper.io/)
 With crsh, you can combine a whole bunch of javascript and coffeescript or css and stylus files into one tiny block. Or several if you like. All files are compiled and merged automagically after each change, but the watcher is disabled in production. In production, resulting javascript will also be uglified.
 
 ## Requirements
